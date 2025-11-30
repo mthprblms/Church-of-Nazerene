@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Growth Proposal - FCCNA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #c5a059;
+            /* Gold/Wheat */
+            --primary-light: #e6c88a;
+            --secondary: #2c3e50;
+            /* Dark Blue/Slate */
+            --accent: #3498db;
+            /* Sky Blue */
+            --light: #f8f9fa;
+            --dark: #1a1a1a;
+            --white: #ffffff;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --gradient-hero: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+            --gradient-gold: linear-gradient(135deg, #c5a059 0%, #e6c88a 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--light);
+            color: var(--secondary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animations */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes shine {
+            0% {
+                background-position: -200% center;
+            }
+
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: var(--gradient-hero);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjIiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .cross-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: inline-block;
+            animation: float 6s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(197, 160, 89, 0.5);
+        }
+
+        .hero-logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 1.5rem;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(197, 160, 89, 0.3));
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #e6c88a, #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 5s linear infinite;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-gold);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(197, 160, 89, 0.4);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-title .line {
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border-top: 4px solid var(--primary);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Revenue Potential */
+        .revenue-section {
+            background: var(--secondary);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .revenue-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .big-number {
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-shadow: 0 0 30px rgba(197, 160, 89, 0.3);
+            margin: 1rem 0;
+        }
+
+        /* Current Reality / Issues */
+        .issues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .issue-card {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--danger);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .issue-card h4 {
+            color: var(--danger);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Opportunities */
+        .opportunities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .opp-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .opp-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .opp-header {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .opp-header h3 {
+            font-size: 1.25rem;
+        }
+
+        .opp-body {
+            padding: 2rem;
+            flex-grow: 1;
+        }
+
+        .opp-list {
+            list-style: none;
+        }
+
+        .opp-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+            color: #555;
+        }
+
+        .opp-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+            border-left: 4px solid var(--primary);
+        }
+
+        .timeline-item h4 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-tag {
+            background: var(--primary-light);
+            color: var(--dark);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--light);
+            text-align: center;
+        }
+
+        .contact-box {
+            background: var(--white);
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .big-number {
+                font-size: 3.5rem;
+            }
+
+            section {
+                padding: 3rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <img src="logo6.png" alt="FCCNA Logo" class="hero-logo">
+            <h1>Stewarding Digital Growth</h1>
+            <p>A strategic roadmap to expand the reach and resources of<br>Forrest City Church of the Nazarene</p>
+            <a href="#summary" class="btn">View The Proposal</a>
+        </div>
+    </header>
+
+    <!-- Executive Summary -->
+    <section id="summary">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Executive Summary</h2>
+                <div class="line"></div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card reveal">
+                    <div class="stat-number">27</div>
+                    <div class="stat-label">Growth Opportunities</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-number">$72k</div>
+                    <div class="stat-label">Potential Annual Revenue</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-number">1.4k</div>
+                    <div class="stat-label">Current YouTube Views</div>
+                </div>
+                <div class="stat-card reveal">
+                    <div class="stat-number">129</div>
+                    <div class="stat-label">Sermons Ready to Monetize</div>
+                </div>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;" class="reveal">
+                <p style="font-size: 1.2rem; color: #555;">
+                    This comprehensive audit identifies actionable strategies across digital presence, content
+                    monetization, and community engagement. By leveraging your existing assets—like your 129 video
+                    sermons—we can unlock significant new revenue streams and reach thousands more people with the
+                    Gospel.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Current Reality -->
+    <section style="background: #fff5f5;">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Critical Issues</h2>
+                <p style="color: #666;">Current barriers to growth and engagement</p>
+                <div class="line" style="background: var(--danger);"></div>
+            </div>
+            <div class="issues-grid reveal">
+                <div class="issue-card">
+                    <h4>Events Page Blank</h4>
+                    <p>Missed opportunity for community engagement and paid workshops.</p>
+                </div>
+                <div class="issue-card">
+                    <h4>Header Images Incorrect</h4>
+                    <p>Affects professionalism and first impressions for new visitors.</p>
+                </div>
+                <div class="issue-card">
+                    <h4>No Podcast</h4>
+                    <p>129 sermons sitting unused instead of reaching global commuters.</p>
+                </div>
+                <div class="issue-card">
+                    <h4>Donation Friction</h4>
+                    <p>Lack of embedded giving options reduces spontaneous donations.</p>
+                </div>
+                <div class="issue-card">
+                    <h4>Poor SEO</h4>
+                    <p>Missing meta tags means locals can't find the church on Google.</p>
+                </div>
+                <div class="issue-card">
+                    <h4>Slow Page Speed</h4>
+                    <p>Unoptimized images are driving mobile visitors away.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Revenue Potential -->
+    <section class="revenue-section">
+        <div class="container revenue-content reveal">
+            <h2>Unlocking Kingdom Resources</h2>
+            <p>Estimated additional annual revenue from implementing recommended strategies</p>
+            <div class="big-number">$24,000 - $72,000</div>
+            <p style="opacity: 0.8; max-width: 600px; margin: 0 auto;">
+                Through podcast monetization, YouTube optimization, and modernized donation flows, we can generate
+                sustainable funding for ministry expansion.
+            </p>
+        </div>
+    </section>
+
+    <!-- Opportunities -->
+    <section id="opportunities">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Key Opportunities</h2>
+                <div class="line"></div>
+            </div>
+            <div class="opportunities-grid">
+                <!-- Card 1 -->
+                <div class="opp-card reveal">
+                    <div class="opp-header">
+                        <h3>🎙️ Podcast Ministry</h3>
+                        <span class="badge">High Priority</span>
+                    </div>
+                    <div class="opp-body">
+                        <p style="margin-bottom: 1rem; color: #666;">Transform 129 existing sermons into a global
+                            podcast.</p>
+                        <ul class="opp-list">
+                            <li>Distribute to Spotify & Apple Podcasts</li>
+                            <li>Monetize via listener support</li>
+                            <li>Reach commuters and global listeners</li>
+                            <li><strong>Potential: $6k-$24k/yr</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="opp-card reveal">
+                    <div class="opp-header">
+                        <h3>📺 YouTube Growth</h3>
+                        <span class="badge">Medium Priority</span>
+                    </div>
+                    <div class="opp-body">
+                        <p style="margin-bottom: 1rem; color: #666;">Optimize your channel to reach 1,000+ subscribers.
+                        </p>
+                        <ul class="opp-list">
+                            <li>Create engaging thumbnails</li>
+                            <li>Post "Shorts" for viral reach</li>
+                            <li>Optimize titles for search</li>
+                            <li><strong>Potential: $3.6k-$18k/yr</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="opp-card reveal">
+                    <div class="opp-header">
+                        <h3>💳 Modern Giving</h3>
+                        <span class="badge">High Priority</span>
+                    </div>
+                    <div class="opp-body">
+                        <p style="margin-bottom: 1rem; color: #666;">Remove friction from the donation process.</p>
+                        <ul class="opp-list">
+                            <li>Embed donation widget on homepage</li>
+                            <li>Add recurring giving options</li>
+                            <li>Implement Stripe for easier payments</li>
+                            <li><strong>Impact: +25-50% giving</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="opp-card reveal">
+                    <div class="opp-header">
+                        <h3>📚 Digital Products</h3>
+                        <span class="badge">High Priority</span>
+                    </div>
+                    <div class="opp-body">
+                        <p style="margin-bottom: 1rem; color: #666;">Create resources from existing content.</p>
+                        <ul class="opp-list">
+                            <li>Sermon transcripts & study guides</li>
+                            <li>Monthly devotional subscriptions</li>
+                            <li>Video courses on faith topics</li>
+                            <li><strong>Potential: $2.4k-$9.6k/yr</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="opp-card reveal">
+                    <div class="opp-header">
+                        <h3>🔍 SEO & Traffic</h3>
+                        <span class="badge">Medium Priority</span>
+                    </div>
+                    <div class="opp-body">
+                        <p style="margin-bottom: 1rem; color: #666;">Get found by people searching in Forest City.</p>
+                        <ul class="opp-list">
+                            <li>Optimize Google My Business</li>
+                            <li>Fix meta tags and page titles</li>
+                            <li>Start a blog (2 posts/month)</li>
+                            <li><strong>Impact: +200-400% traffic</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="opp-card reveal">
+                    <div class="opp-header">
+                        <h3>🏢 Facility Rentals</h3>
+                        <span class="badge">Medium Priority</span>
+                    </div>
+                    <div class="opp-body">
+                        <p style="margin-bottom: 1rem; color: #666;">Monetize unused space during the week.</p>
+                        <ul class="opp-list">
+                            <li>Weddings and community events</li>
+                            <li>Meeting space for local groups</li>
+                            <li>Online booking system</li>
+                            <li><strong>Potential: $6k-$24k/yr</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section style="background: var(--light);">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>30-Day Quick Wins</h2>
+                <div class="line"></div>
+            </div>
+            <div class="timeline reveal">
+                <div class="timeline-item">
+                    <span class="timeline-tag">Week 1</span>
+                    <h4>Foundation & Fixes</h4>
+                    <p>Fix header images, embed PayPal widget, setup Google Analytics, and create Events page content.
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-tag">Week 2</span>
+                    <h4>Distribution</h4>
+                    <p>Start podcast distribution to Spotify/Apple and setup email marketing list.</p>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-tag">Weeks 3-4</span>
+                    <h4>Optimization</h4>
+                    <p>Optimize YouTube thumbnails, start Shorts strategy, and launch first digital product.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investment -->
+    <section>
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Investment & ROI</h2>
+                <div class="line"></div>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);"
+                class="reveal">
+                <p style="margin-bottom: 1rem;">
+                    <strong>Minimal Investment:</strong> $0 (Free tools only)<br>
+                    <strong>Professional Package:</strong> $100-150/month (Software & Hosting)
+                </p>
+                <div
+                    style="background: #f0fdf4; padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--success);">
+                    <h4 style="color: var(--success); margin-bottom: 0.5rem;">ROI Analysis</h4>
+                    <p>Even with a professional toolset investment (~$1,800/yr), implementing just half of these
+                        strategies could generate <strong>$12,000 - $36,000</strong> in additional revenue. That's a
+                        600-2,000% Return on Investment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Contact -->
+    <section class="contact">
+        <div class="container">
+            <div class="contact-box reveal">
+                <h2>Let's Build This Together</h2>
+                <p style="margin: 1.5rem 0; color: #666;">
+                    I have the professional skills to implement these strategies and a heart to see your church thrive.
+                    I've already done the research—now I'd love to help you do the work.
+                </p>
+                <a href="mailto:fccnaz@gmail.com" class="btn">Contact Me to Start</a>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: #888;">
+                    Review the full audit PDF attached to the email for details.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Simple Scroll Reveal Script
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        reveal();
+    </script>
+</body>
+
+</html>
